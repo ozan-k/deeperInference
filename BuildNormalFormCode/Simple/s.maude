@@ -1,0 +1,62 @@
+mod S is
+sorts Atom Unit Structure .
+subsort Atom < Structure .
+subsort Unit < Structure .
+op 1 : -> Unit .
+op bot : -> Unit .
+
+op -_ : Atom -> Atom [ prec 50 ] .
+op ?_ : Structure -> Structure [ prec 60 ] .
+op !_ : Structure -> Structure [ prec 60 ] .
+op [_,_] : Structure Structure -> Structure [assoc comm] .
+op {_,_} : Structure Structure -> Structure [assoc comm] .
+ops a b c d e f g h i j k : -> Atom .
+var R T U V : Structure . var A : Atom .
+
+  rl [switch] :  { [ R , U ] , T } => [ { R , T } , U ] .
+endm
+
+--- search [[ { k, c }, [ { k, [ c, [ c, [ c, c ] ] ] }, [ { k, [ c, [ c, c ] ] }, [ { k, [ c, c ] }, [ { k, [ c, [ c, [ c, [ c, c ] ] ] ] }, { k, c } ] ] ] ] ], { [ [ - k , [ - k , - k ] ] , { - c, { - c, { - c, { - c, { - c, { - c, { - c, - c } } } } } } } ], [ [ - k , [ - k , - k ] ] , { - c, { - c, { - c, { - c, { - c, { - c, { - c, - c } } } } } } } ] } ] =>! R .  
+
+
+--- search in S : {{{{[a,- a],[b,- b]},[c, - c] },[d, - d] }, [e, - e] } =>! R .
+
+--- search {[a,- a],[b,- b]} =>! R .
+
+
+***(
+search in S : {[a,- a],[a,- a]} =>! R .
+
+search in S : {[a,- a],[b,- b]} =>! R .
+
+***(  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+
+search in S : {{[a,- a],[a,- a]},[a, - a] } =>! R .
+
+search in S : {{[a,- a],[a,- a]},[b, - b]} =>! R .
+
+search in S : {{[a,- a],[b,- b]},[c, - c]} =>! R .
+
+***(  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+
+search in S : {{{[a,- a],[a,- a]},[a, - a] }, [a, - a] } =>! R .
+
+***(  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+
+search in S : {{{{[a,- a],[a,- a]},[a, - a] },[a, - a] }, [a, - a] } =>! R .
+
+***(  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+
+search in S : {{{{{[a,- a],[a,- a]},[a, - a] },[a, - a] }, [a, - a] }, [a, - a] }  =>! R .
+
+***(  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+
+search in S : {{{{{{[a,- a],[a,- a]},[a, - a] },[a, - a] }, [a, - a] }, [a, - a] }, [a, - a] }  =>! R .
+
+***(  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+
+search in S : {{{{{{[a,- a],[a,- a]},[a, - a] },[a, - a] }, [a, - a] }, [a, - a] }, { [a, - a] , [a, - a] } }  =>! R .
+
+***(  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ )
+
+)

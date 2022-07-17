@@ -1,0 +1,25 @@
+fmod MLL-Signature is
+  sorts Atom Unit Structure Sequent Front .
+  subsort Atom < Structure .
+  subsort Unit < Structure .
+  subsort Sequent < Front .
+
+  ops a b c d e f g h i j k l m n p q r s : -> Atom .
+  op 1 : -> Unit .
+  op bot : -> Unit .
+  op |~_ : Structure -> Sequent [ prec 40 ] .
+  op _and_ : Sequent Front -> Front [assoc comm] .
+  op -_ : Atom -> Atom [ prec 50 ] .
+  op [_,_] : Structure Structure -> Structure [assoc comm] .
+  op {_,_} : Structure Structure -> Structure [assoc] .
+endfm
+
+mod SC_search is
+  inc MLL-Signature .
+  var R T Q U V : Structure . var A B C D E F G H I J : Atom .
+  var X : Front .
+  var S : Sequent .
+
+  rl [bot] : |~ [ R , bot ] => |~ R .
+endm
+
